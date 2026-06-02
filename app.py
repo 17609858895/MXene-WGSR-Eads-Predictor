@@ -67,9 +67,22 @@ st.markdown(
         color: white;
         margin-bottom: 18px;
         box-shadow: 0 18px 42px rgba(18, 60, 85, 0.18);
+        position: relative;
     }
     .hero h1 { font-size: 2.15rem; margin: 0 0 0.42rem 0; letter-spacing: 0; line-height: 1.14; }
     .hero p { font-size: 1.02rem; opacity: 0.95; max-width: 900px; margin: 0; line-height: 1.58; }
+    .version-pill {
+        position: absolute;
+        top: 16px;
+        right: 18px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 0.78rem;
+        font-weight: 750;
+        color: #ffffff;
+    }
     .soft-card {
         background: #ffffff;
         border: 1px solid #dbe7ea;
@@ -230,6 +243,7 @@ example = load_example()
 st.markdown(
     """
     <div class="hero">
+      <div class="version-pill">Aligned UI v2</div>
       <h1>MXene WGSR E<sub>ads</sub> Predictor</h1>
       <p>Interpretable WGS-domain adsorption-energy prediction for MXene catalyst descriptors. The app uses the same preprocessing and TOPSIS ensemble model as the paper workflow.</p>
     </div>
