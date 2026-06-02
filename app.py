@@ -48,15 +48,79 @@ st.set_page_config(page_title="MXene Eads Predictor", page_icon="MX", layout="wi
 st.markdown(
     """
     <style>
-    .stApp { background: linear-gradient(180deg, #f7fbfa 0%, #eef4f7 100%); color: #1f2933; }
-    .block-container { padding-top: 1.8rem; max-width: 1240px; }
-    div[data-testid="stMetric"] { background: #ffffff; border: 1px solid #dbe7ea; border-radius: 12px; padding: 14px 16px; }
-    .hero { background: linear-gradient(135deg, #123c55 0%, #0f766e 62%, #8bbf9f 100%); padding: 28px 30px; border-radius: 18px; color: white; margin-bottom: 18px; }
-    .hero h1 { font-size: 2.15rem; margin: 0 0 0.35rem 0; letter-spacing: 0; }
-    .hero p { font-size: 1.02rem; opacity: 0.95; max-width: 920px; }
-    .soft-card { background: #ffffff; border: 1px solid #dbe7ea; border-radius: 14px; padding: 16px 18px; margin: 8px 0 16px 0; }
-    .warning-card { background: #fff8eb; border: 1px solid #f1d7a5; border-radius: 12px; padding: 13px 15px; color: #5b4214; }
-    .small-note { color: #607180; font-size: 0.92rem; }
+    .stApp { background: #f5f8f7; color: #1f2933; }
+    .block-container { padding-top: 1.6rem; padding-bottom: 2.2rem; max-width: 1180px; }
+    div[data-testid="stMetric"] {
+        background: #ffffff;
+        border: 1px solid #dbe7ea;
+        border-radius: 10px;
+        padding: 14px 16px;
+        min-height: 104px;
+        box-shadow: 0 8px 22px rgba(31, 41, 51, 0.045);
+    }
+    div[data-testid="stMetricLabel"] p { color: #526371; font-weight: 700; }
+    div[data-testid="stMetricValue"] { color: #123c55; }
+    .hero {
+        background: linear-gradient(135deg, #123c55 0%, #0f766e 68%, #8bbf9f 100%);
+        padding: 30px 32px;
+        border-radius: 16px;
+        color: white;
+        margin-bottom: 18px;
+        box-shadow: 0 18px 42px rgba(18, 60, 85, 0.18);
+    }
+    .hero h1 { font-size: 2.15rem; margin: 0 0 0.42rem 0; letter-spacing: 0; line-height: 1.14; }
+    .hero p { font-size: 1.02rem; opacity: 0.95; max-width: 900px; margin: 0; line-height: 1.58; }
+    .soft-card {
+        background: #ffffff;
+        border: 1px solid #dbe7ea;
+        border-radius: 12px;
+        padding: 15px 17px;
+        margin: 8px 0 16px 0;
+        box-shadow: 0 8px 22px rgba(31, 41, 51, 0.04);
+    }
+    .warning-card {
+        background: #fff8eb;
+        border: 1px solid #f1d7a5;
+        border-radius: 10px;
+        padding: 13px 15px;
+        color: #5b4214;
+        margin: 16px 0 16px 0;
+    }
+    .section-title {
+        color: #123c55;
+        font-size: 0.98rem;
+        font-weight: 800;
+        margin: 0.1rem 0 0.55rem 0;
+        padding-bottom: 0.35rem;
+        border-bottom: 1px solid #e3ecef;
+    }
+    .small-note { color: #607180; font-size: 0.92rem; line-height: 1.5; }
+    div[data-testid="stForm"] {
+        background: #ffffff;
+        border: 1px solid #dbe7ea;
+        border-radius: 14px;
+        padding: 18px 18px 10px 18px;
+        box-shadow: 0 10px 26px rgba(31, 41, 51, 0.055);
+    }
+    div[data-testid="stTextInput"] label,
+    div[data-testid="stSelectbox"] label,
+    div[data-testid="stNumberInput"] label {
+        color: #334e5c;
+        font-size: 0.86rem;
+        font-weight: 750;
+    }
+    .stTabs [data-baseweb="tab-list"] { gap: 8px; }
+    .stTabs [data-baseweb="tab"] {
+        background: #ffffff;
+        border: 1px solid #dbe7ea;
+        border-radius: 9px 9px 0 0;
+        padding: 8px 14px;
+    }
+    .stButton > button, .stDownloadButton > button {
+        border-radius: 9px;
+        min-height: 42px;
+        font-weight: 750;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -192,29 +256,45 @@ st.markdown(
 tabs = st.tabs(["Single prediction", "Batch prediction", "Model information", "Input template"])
 
 with tabs[0]:
-    st.markdown('<div class="soft-card">Enter one MXene adsorption system. Leave unknown numeric descriptors blank; the model will impute them.</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="soft-card"><b>Single-sample input</b><br><span class="small-note">Enter one MXene adsorption system. Numeric descriptors use the paper descriptor names and units; missing values in batch files are imputed by the training pipeline.</span></div>',
+        unsafe_allow_html=True,
+    )
     defaults = example.iloc[0].to_dict()
-    left, right = st.columns([1, 1])
-    with left:
-        formula = st.text_input("Formula", value=str(defaults.get("Formula", "")))
-        stacking = st.selectbox("Stacking", sorted(example["Stacking"].dropna().astype(str).unique()), index=0)
-        m1 = st.selectbox("M1", sorted(example["M1"].dropna().astype(str).unique()), index=0)
-        m2_options = ["None", *sorted(example["M2"].dropna().astype(str).unique())]
-        m2 = st.selectbox("M2", m2_options, index=0)
-        x_atom = st.selectbox("X", sorted(example["X"].dropna().astype(str).unique()), index=0)
-        t1 = st.selectbox("T1_type", ["None", *sorted(example["T1_type"].dropna().astype(str).unique())], index=0)
-        mol = st.selectbox("Mol", sorted(example["Mol"].dropna().astype(str).unique()), index=0)
-    with right:
-        values = {}
-        for col in NUMERIC_BASE:
-            default = defaults.get(col, np.nan)
-            values[col] = st.number_input(col, value=float(default) if pd.notna(default) else 0.0, format="%.5f")
+    with st.form("single_prediction_form", clear_on_submit=False):
+        comp_col, struct_col, elec_col = st.columns(3, gap="large")
+        with comp_col:
+            st.markdown('<div class="section-title">Composition and adsorbate</div>', unsafe_allow_html=True)
+            formula = st.text_input("Formula", value=str(defaults.get("Formula", "")))
+            stacking = st.selectbox("Stacking", sorted(example["Stacking"].dropna().astype(str).unique()), index=0)
+            m1 = st.selectbox("M1", sorted(example["M1"].dropna().astype(str).unique()), index=0)
+            m2_options = ["None", *sorted(example["M2"].dropna().astype(str).unique())]
+            m2 = st.selectbox("M2", m2_options, index=0)
+            x_atom = st.selectbox("X", sorted(example["X"].dropna().astype(str).unique()), index=0)
+            t1 = st.selectbox("T1_type", ["None", *sorted(example["T1_type"].dropna().astype(str).unique())], index=0)
+            mol = st.selectbox("Mol", sorted(example["Mol"].dropna().astype(str).unique()), index=0)
+        with struct_col:
+            st.markdown('<div class="section-title">Structure descriptors</div>', unsafe_allow_html=True)
+            values = {}
+            for col in ["a_ang", "N_Layers", "Layer_dist_MX", "Layer_dist_MM", "Length_MX", "Length_MT1"]:
+                default = defaults.get(col, np.nan)
+                values[col] = st.number_input(col, value=float(default) if pd.notna(default) else 0.0, format="%.5f")
+        with elec_col:
+            st.markdown('<div class="section-title">Electronic descriptors</div>', unsafe_allow_html=True)
+            for col in ["E_Form", "Bader_M1", "Bader_M2", "Bader_X", "Bader_T1", "Band_gap_PBE_ev"]:
+                default = defaults.get(col, np.nan)
+                values[col] = st.number_input(col, value=float(default) if pd.notna(default) else 0.0, format="%.5f")
+        submitted = st.form_submit_button("Predict Eads", type="primary", use_container_width=True)
 
-    if st.button("Predict Eads", type="primary", use_container_width=True):
+    if submitted:
         row = {"Formula": formula, "Stacking": stacking, "M1": m1, "M2": np.nan if m2 == "None" else m2, "X": x_atom, "T1_type": np.nan if t1 == "None" else t1, "Mol": mol, **values}
         result, missing = predict(pd.DataFrame([row]), bundle)
         value = float(result["Predicted_E_ads_eV"].iloc[0])
-        st.success(f"Predicted Eads = {value:.4f} eV")
+        res_col, note_col = st.columns([0.35, 0.65], gap="large")
+        with res_col:
+            st.metric("Predicted Eads", f"{value:.4f} eV", "TOPSIS ensemble")
+        with note_col:
+            st.markdown('<div class="soft-card"><b>Prediction note</b><br><span class="small-note">Use this value for WGS-domain MXene adsorption-energy estimation. For dopant-domain screening, rely on DFT-labelled trends rather than direct model transfer.</span></div>', unsafe_allow_html=True)
         if missing:
             st.info("Missing descriptors were imputed: " + ", ".join(missing))
         st.dataframe(result, use_container_width=True)
