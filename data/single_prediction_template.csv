@@ -1,0 +1,2 @@
+﻿Formula,Stacking,M1,M2,X,T1_type,Mol,a_ang,N_Layers,Layer_dist_MX,Layer_dist_MM,Length_MX,Length_MT1,E_Form,Bader_M1,Bader_M2,Bader_X,Bader_T1,Band_gap_PBE_ev
+Mo2C,ABA,Mo,,C,,H2O,2.84,3.0,1.363,2.725,2.13,,2.2,0.61,,-1.22,,0.0102

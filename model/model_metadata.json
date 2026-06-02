@@ -1,0 +1,27 @@
+{
+  "TOPSIS_ensemble": {
+    "R2": 0.8287029647354156,
+    "RMSE": 0.693005482330498,
+    "MAE": 0.392751290281539
+  },
+  "ExtraTrees": {
+    "R2": 0.8265145529925059,
+    "RMSE": 0.697418192228492,
+    "MAE": 0.3724734328872205
+  },
+  "model_weights": {
+    "RF": 0.21632703555662108,
+    "ExtraTrees": 0.3497002784936701,
+    "GBR": 0.06812464851360961,
+    "HGBR": 0.0,
+    "SVR": 0.14719357503700048,
+    "MLP": 0.21865446239909864
+  },
+  "n_wgs_training_rows": 599,
+  "n_holdout_rows": 120,
+  "notes": [
+    "The deployed model is intended for WGS-domain MXene adsorption systems.",
+    "Missing descriptors are imputed by the same preprocessing pipeline used during training.",
+    "Dopant-domain transfer was weak in the paper diagnostics; do not use this app as a reliable dopant screening engine."
+  ]
+}
