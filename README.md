@@ -27,11 +27,17 @@ MXene-WGSR-Eads-Predictor/
 │   └── single_prediction_template.csv
 ├── scripts/
 │   └── train_export_model.py
+├── paper_raw_data_and_code/
+│   ├── data/raw/
+│   ├── code/
+│   └── docs/
 ├── .streamlit/
 │   └── config.toml
 ├── requirements.txt
 └── README.md
 ```
+
+The `paper_raw_data_and_code/` folder contains the paper raw dataset, figure/table generation code, model export code and manuscript framework notes.
 
 ## Run locally
 
