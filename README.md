@@ -61,9 +61,12 @@ Repository: 17609858895/MXene-WGSR-Eads-Predictor
 Branch: main
 Main file path: app.py
 Python dependencies: requirements.txt
+Python version: 3.12
 ```
 
-Because the repository is private, Streamlit Community Cloud may ask you to authorize access to this GitHub repository before deployment.
+Important: open **Advanced settings** during deployment and select **Python 3.12**. The model bundle was exported with the pinned scikit-learn/pandas environment in `requirements.txt`; Python 3.14 can force source builds for dependencies and fail during installation.
+
+If Streamlit Community Cloud still starts with Python 3.14, go to the app dashboard, open **Settings -> Advanced settings**, change Python to **3.12**, then reboot or redeploy the app.
 
 ## Input columns
 
