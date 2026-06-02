@@ -42,11 +42,28 @@ streamlit run app.py
 
 ## Deploy on Streamlit Community Cloud
 
-1. Upload this folder to a GitHub repository.
-2. Go to Streamlit Community Cloud.
-3. Create a new app from the repository.
-4. Set the main file path to `app.py`.
-5. Deploy.
+Repository:
+
+```text
+https://github.com/17609858895/MXene-WGSR-Eads-Predictor
+```
+
+Direct deploy page:
+
+```text
+https://share.streamlit.io/deploy?repository=https://github.com/17609858895/MXene-WGSR-Eads-Predictor&branch=main&mainModule=app.py
+```
+
+Deployment settings:
+
+```text
+Repository: 17609858895/MXene-WGSR-Eads-Predictor
+Branch: main
+Main file path: app.py
+Python dependencies: requirements.txt
+```
+
+Because the repository is private, Streamlit Community Cloud may ask you to authorize access to this GitHub repository before deployment.
 
 ## Input columns
 
