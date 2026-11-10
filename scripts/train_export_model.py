@@ -12,7 +12,7 @@ from sklearn.metrics import mean_absolute_error, r2_score
 
 APP_ROOT = Path(__file__).resolve().parents[1]
 PROJECT_ROOT = APP_ROOT.parent
-FIG_SCRIPT = PROJECT_ROOT / "新论文绘图_吸附能主线" / "Fig00_scripts" / "generate_all_figures.py"
+FIG_SCRIPT = PROJECT_ROOT / "04论文图件" / "Fig00_scripts" / "generate_all_figures.py"
 
 sys.path.insert(0, str(FIG_SCRIPT.parent))
 import generate_all_figures as paper_model  # noqa: E402
@@ -86,7 +86,9 @@ def main() -> None:
             "MAE": float(mean_absolute_error(y_test, pred_best)),
         },
         "model_weights": weights,
-        "n_wgs_training_rows": int(len(wgs)),
+        "weighting": "entropy-weighted TOPSIS on 5-fold cross-validation metrics (R2, RMSE, MAE, nRMSE) within the training set",
+        "n_wgs_records": int(len(wgs)),
+        "n_training_rows": int(len(context["y_train"])),
         "n_holdout_rows": int(len(y_test)),
         "notes": [
             "The deployed model is intended for WGS-domain MXene adsorption systems.",

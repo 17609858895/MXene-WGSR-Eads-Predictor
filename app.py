@@ -301,6 +301,13 @@ with tabs[0]:
         submitted = st.form_submit_button("Predict Eads", type="primary", use_container_width=True)
 
     if submitted:
+        # Descriptors that are undefined without a secondary metal or a termination are passed as
+        # missing, so that they are imputed and flagged exactly as in training.
+        if m2 == "None":
+            values["Bader_M2"] = np.nan
+        if t1 == "None":
+            values["Length_MT1"] = np.nan
+            values["Bader_T1"] = np.nan
         row = {"Formula": formula, "Stacking": stacking, "M1": m1, "M2": np.nan if m2 == "None" else m2, "X": x_atom, "T1_type": np.nan if t1 == "None" else t1, "Mol": mol, **values}
         result, missing = predict(pd.DataFrame([row]), bundle)
         value = float(result["Predicted_E_ads_eV"].iloc[0])

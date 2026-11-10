@@ -1,23 +1,25 @@
 {
   "TOPSIS_ensemble": {
-    "R2": 0.8287029647354156,
-    "RMSE": 0.693005482330498,
-    "MAE": 0.392751290281539
+    "R2": 0.8149709665628173,
+    "RMSE": 0.7202473800099938,
+    "MAE": 0.4186767779742012
   },
   "ExtraTrees": {
     "R2": 0.8265145529925059,
     "RMSE": 0.697418192228492,
-    "MAE": 0.3724734328872205
+    "MAE": 0.37247343288722046
   },
   "model_weights": {
-    "RF": 0.21632703555662108,
-    "ExtraTrees": 0.3497002784936701,
-    "GBR": 0.06812464851360961,
-    "HGBR": 0.0,
-    "SVR": 0.14719357503700048,
-    "MLP": 0.21865446239909864
+    "RF": 0.226613155738148,
+    "ExtraTrees": 0.3683114580527371,
+    "GBR": 0.25414311869775513,
+    "HGBR": 0.10472591191150322,
+    "SVR": 0.046206355599856655,
+    "MLP": 0.0
   },
-  "n_wgs_training_rows": 599,
+  "weighting": "entropy-weighted TOPSIS on 5-fold cross-validation metrics (R2, RMSE, MAE, nRMSE) within the training set",
+  "n_wgs_records": 599,
+  "n_training_rows": 479,
   "n_holdout_rows": 120,
   "notes": [
     "The deployed model is intended for WGS-domain MXene adsorption systems.",
